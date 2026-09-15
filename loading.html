@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>분석 중... | DeepGuard</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="index.html" class="brand">
+                <div class="brand-mark">🛡️</div>
+                DeepGuard
+            </a>
+            <div class="nav-steps">
+                <div class="nav-step done"><span class="dot">✓</span><span class="label">업로드</span></div>
+                <div class="nav-step-connector"></div>
+                <div class="nav-step active"><span class="dot">2</span><span class="label">분석 중</span></div>
+                <div class="nav-step-connector"></div>
+                <div class="nav-step"><span class="dot">3</span><span class="label">결과</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="loading-wrap">
+        <div class="card loading-card">
+
+            <div class="spinner-ring">
+                <svg viewBox="0 0 120 120">
+                    <defs>
+                        <linearGradient id="loadingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4fd1ff" />
+                            <stop offset="100%" stop-color="#7c8cff" />
+                        </linearGradient>
+                    </defs>
+                    <circle class="spinner-track" cx="60" cy="60" r="52"></circle>
+                    <circle id="progressCircle" class="spinner-progress" cx="60" cy="60" r="52"></circle>
+                </svg>
+                <div id="pctText" class="spinner-pct">0%</div>
+            </div>
+
+            <h2>영상을 분석하고 있습니다</h2>
+            <div id="stepLabel" class="loading-step-label">준비 중...</div>
+
+            <div class="step-checklist" id="stepChecklist">
+                <div class="step-item" data-step="0"><span class="mark">1</span><span>영상 업로드 확인</span></div>
+                <div class="step-item" data-step="1"><span class="mark">2</span><span>오디오 트랙 분리</span></div>
+                <div class="step-item" data-step="2"><span class="mark">3</span><span>이미지 프레임 추출</span></div>
+                <div class="step-item" data-step="3"><span class="mark">4</span><span>오디오 딥페이크 탐지 모델 추론</span></div>
+                <div class="step-item" data-step="4"><span class="mark">5</span><span>이미지 딥페이크 탐지 모델 추론</span></div>
+                <div class="step-item" data-step="5"><span class="mark">6</span><span>얼굴 부위별 세부 분석</span></div>
+                <div class="step-item" data-step="6"><span class="mark">7</span><span>결과 종합 중</span></div>
+            </div>
+
+            <div id="loadingFile" class="loading-file">-</div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/loading.js"></script>
+</body>
+</html>

@@ -1,13 +1,125 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>������ũ Ž�� ������Ʈ</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepGuard | 딥페이크 탐지 시스템</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <h1>������Ʈ�� ���۵Ǿ����ϴ�!</h1>
-    <script src="main.js"></script>
+
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <div class="brand">
+                <div class="brand-mark">🛡️</div>
+                DeepGuard
+                <span class="brand-sub">딥페이크 탐지 데모</span>
+            </div>
+            <a href="upload.html" class="btn btn-primary">지금 분석하기</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <span class="eyebrow">● DEMO BUILD · 모델 추론은 더미 데이터로 표시됩니다</span>
+            <h1>오디오와 영상, <span>각각의 전문 모델</span>로<br />합성 여부를 교차 검증합니다</h1>
+            <p>
+                영상을 업로드하면 오디오 트랙과 이미지 프레임을 분리한 뒤, 각각
+                독립적으로 학습된 딥페이크 탐지 모델의 추론을 거쳐 최종 판정을
+                내려드립니다.
+            </p>
+            <div class="hero-actions">
+                <a href="upload.html" class="btn btn-primary btn-lg">영상 업로드하고 분석 시작</a>
+                <a href="#how" class="btn btn-secondary btn-lg">동작 방식 보기</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="how">
+        <div class="container">
+            <div class="section-head">
+                <h2>분석은 이렇게 진행돼요</h2>
+                <p>업로드부터 결과 대시보드까지, 4단계 파이프라인으로 동작합니다.</p>
+            </div>
+            <div class="flow-grid">
+                <div class="card flow-card">
+                    <div class="flow-num">1</div>
+                    <h3>영상 업로드</h3>
+                    <p>분석하고 싶은 영상 파일을 웹페이지에 업로드합니다.</p>
+                </div>
+                <div class="card flow-card">
+                    <div class="flow-num">2</div>
+                    <h3>오디오 / 이미지 분리</h3>
+                    <p>업로드된 영상을 오디오 트랙과 이미지(프레임) 데이터로 나눕니다.</p>
+                </div>
+                <div class="card flow-card">
+                    <div class="flow-num">3</div>
+                    <h3>개별 모델 추론</h3>
+                    <p>오디오 딥페이크 탐지 모델과 이미지 딥페이크 탐지 모델이 각각 독립적으로 추론합니다.</p>
+                </div>
+                <div class="card flow-card">
+                    <div class="flow-num">4</div>
+                    <h3>결과 종합</h3>
+                    <p>두 모델의 결과를 종합해 최종 판정과 상세 대시보드를 보여줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>왜 오디오 / 이미지 모델을 분리했나요?</h2>
+                <p>합성 영상은 이미지와 음성 중 한쪽에서만 흔적이 남는 경우가 많습니다. 각 도메인에 특화된 모델을 따로 두면 놓치는 신호를 줄일 수 있습니다.</p>
+            </div>
+            <div class="card arch-diagram">
+                <div class="arch-col">
+                    <div class="arch-box"><span class="tag tag-video">VIDEO</span> 프레임 추출 (이미지 시퀀스)</div>
+                    <div class="arch-box"><span class="tag tag-video">VIDEO</span> 이미지 딥페이크 탐지 모델</div>
+                </div>
+                <div class="arch-arrow">＋</div>
+                <div class="arch-col">
+                    <div class="arch-box"><span class="tag tag-audio">AUDIO</span> 오디오 트랙 추출</div>
+                    <div class="arch-box"><span class="tag tag-audio">AUDIO</span> 오디오 딥페이크 탐지 모델</div>
+                </div>
+            </div>
+            <div class="notice-bar">
+                <span>⚠️</span>
+                <span><b>데모 안내:</b> 현재 버전은 프론트엔드 흐름만 구현되어 있으며, 실제 모델 추론 대신 더미(가짜) 결과값을 생성해 대시보드에 표시합니다. 모델 연동 지점은 <code>js/loading.js</code>에 주석으로 표시되어 있습니다.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>주요 특징</h2>
+            </div>
+            <div class="features-grid">
+                <div class="card feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>이중 모델 아키텍처</h3>
+                    <p>오디오와 이미지를 별도 모델로 분석해 정확도와 설명력을 높였습니다.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>시간대별 의심도 분석</h3>
+                    <p>영상 전체 구간 중 어느 시점이 의심스러운지 타임라인으로 확인할 수 있습니다.</p>
+                </div>
+                <div class="card feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>얼굴 부위별 세부 분석</h3>
+                    <p>눈, 코, 입, 윤곽선 등 부위별 위조 흔적 점수를 세분화해 보여줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            DeepGuard Demo &middot; 오디오 · 이미지 분리형 딥페이크 탐지 웹 데모 &middot; 모든 결과는 더미(예시) 데이터입니다.
+        </div>
+    </footer>
+
 </body>
 </html>
