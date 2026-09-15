@@ -1,132 +1,132 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>분석 결과 | DeepGuard</title>
-    <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>분석 결과 | DeepGuard</title>
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <a href="index.html" class="brand">
-                <div class="brand-mark">🛡️</div>
-                DeepGuard
-            </a>
-            <div class="nav-steps">
-                <div class="nav-step done"><span class="dot">✓</span><span class="label">업로드</span></div>
-                <div class="nav-step-connector"></div>
-                <div class="nav-step done"><span class="dot">✓</span><span class="label">분석 중</span></div>
-                <div class="nav-step-connector"></div>
-                <div class="nav-step active"><span class="dot">3</span><span class="label">결과</span></div>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">🛡️</div>
+      DeepGuard
+    </a>
+    <div class="nav-steps">
+      <div class="nav-step done"><span class="dot">✓</span><span class="label">업로드</span></div>
+      <div class="nav-step-connector"></div>
+      <div class="nav-step done"><span class="dot">✓</span><span class="label">분석 중</span></div>
+      <div class="nav-step-connector"></div>
+      <div class="nav-step active"><span class="dot">3</span><span class="label">결과</span></div>
+    </div>
+  </div>
+</nav>
 
-    <div class="container">
-        <div class="dash-summary">
-            <div>
-                <h1>분석 결과 대시보드</h1>
-                <div class="fname">파일: <b id="sumFileName">-</b> &nbsp;·&nbsp; 길이 <b id="sumDuration">-</b> &nbsp;·&nbsp; 분석 시각 <b id="sumTime">-</b></div>
-            </div>
-            <span class="badge badge-warning">⚠ 더미 데이터 (데모)</span>
-        </div>
+<div class="container">
+  <div class="dash-summary">
+    <div>
+      <h1>분석 결과 대시보드</h1>
+      <div class="fname">파일: <b id="sumFileName">-</b> &nbsp;·&nbsp; 길이 <b id="sumDuration">-</b> &nbsp;·&nbsp; 분석 시각 <b id="sumTime">-</b></div>
+    </div>
+    <span class="badge badge-warning">⚠ 더미 데이터 (데모)</span>
+  </div>
 
-        <div class="dashboard-grid">
+  <div class="dashboard-grid">
 
-            <!-- 종합 판정 -->
-            <div class="card verdict-card g-12" id="verdictCard">
-                <div class="verdict-icon" id="verdictIcon">?</div>
-                <div class="verdict-body">
-                    <div class="verdict-title" id="verdictTitle">분석 중...</div>
-                    <div class="verdict-desc" id="verdictDesc">비디오와 오디오 모델의 결과를 종합한 최종 판정입니다.</div>
-                </div>
-                <div class="verdict-score">
-                    <div class="num" id="verdictScore">-</div>
-                    <div class="lbl">종합 위조 점수</div>
-                </div>
-            </div>
-
-            <!-- 비디오 위조 확률 -->
-            <div class="card metric-card g-4">
-                <div class="metric-label"><span class="ic">🎞️</span> 비디오 위조 확률</div>
-                <canvas id="videoGauge" width="180" height="180"></canvas>
-                <div class="gauge-num" id="videoGaugeNum">-</div>
-                <div class="gauge-sub">이미지 프레임 기반 탐지 모델</div>
-            </div>
-
-            <!-- 오디오 위조 확률 -->
-            <div class="card metric-card g-4">
-                <div class="metric-label"><span class="ic">🎙️</span> 오디오 위조 확률</div>
-                <canvas id="audioGauge" width="180" height="180"></canvas>
-                <div class="gauge-num" id="audioGaugeNum">-</div>
-                <div class="gauge-sub">음성 파형 기반 탐지 모델</div>
-            </div>
-
-            <!-- 종합 점수 요약 -->
-            <div class="card metric-card g-4">
-                <div class="metric-label"><span class="ic">📊</span> 종합 점수 요약</div>
-                <canvas id="overallGauge" width="180" height="180"></canvas>
-                <div class="gauge-num" id="overallGaugeNum">-</div>
-                <div class="gauge-sub" id="overallGaugeSub">비디오 55% + 오디오 45% 가중 평균</div>
-            </div>
-
-            <!-- 시간대별 딥페이크 의심도 -->
-            <div class="card g-12 timeline-card">
-                <div class="card-title-row">
-                    <h3>⏱ 시간대별 딥페이크 의심도</h3>
-                    <span class="hint">영상 재생 구간별 의심도 변화</span>
-                </div>
-                <canvas id="timelineChart"></canvas>
-                <div class="timeline-legend">
-                    <span><span class="legend-dot" style="background:#4fd1ff"></span>의심도(%)</span>
-                    <span><span class="legend-dot" style="background:#ff5470"></span>위험 구간 (70% 이상)</span>
-                    <span><span class="legend-dot" style="background:#ffb454"></span>주의 구간 (40~70%)</span>
-                </div>
-            </div>
-
-            <!-- 얼굴 부위별 분석 -->
-            <div class="card g-12">
-                <div class="card-title-row">
-                    <h3>🧑 얼굴 부위별 분석 결과</h3>
-                    <span class="hint">부위별 합성 흔적 의심도</span>
-                </div>
-                <div class="face-analysis-body">
-                    <div class="face-svg-wrap">
-                        <svg id="faceSvg" width="180" height="220" viewBox="0 0 180 220">
-                            <!-- 얼굴 윤곽 -->
-                            <ellipse id="regSkin" cx="90" cy="115" rx="62" ry="80" fill="#2dd4a7" fill-opacity="0.18" stroke="#324063" stroke-width="1.5" />
-                            <!-- 턱선 -->
-                            <path id="regJaw" d="M 34 120 Q 34 185 90 205 Q 146 185 146 120" fill="none" stroke="#324063" stroke-width="3" />
-                            <!-- 눈썹 -->
-                            <path id="regBrows" d="M 52 88 Q 64 80 76 88 M 104 88 Q 116 80 128 88" fill="none" stroke="#324063" stroke-width="4" stroke-linecap="round" />
-                            <!-- 눈 -->
-                            <g id="regEyes">
-                                <ellipse cx="64" cy="103" rx="11" ry="6" fill="#324063" />
-                                <ellipse cx="116" cy="103" rx="11" ry="6" fill="#324063" />
-                            </g>
-                            <!-- 코 -->
-                            <path id="regNose" d="M 90 100 L 84 132 Q 90 138 96 132 Z" fill="none" stroke="#324063" stroke-width="3" stroke-linejoin="round" />
-                            <!-- 입 -->
-                            <path id="regMouth" d="M 66 155 Q 90 168 114 155" fill="none" stroke="#324063" stroke-width="4" stroke-linecap="round" />
-                        </svg>
-                    </div>
-                    <div class="face-region-list" id="faceRegionList">
-                        <!-- JS가 채웁니다 -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="dash-actions">
-                <button id="restartBtn" class="btn btn-secondary">새 영상 분석하기</button>
-                <a href="index.html" class="btn btn-secondary">처음으로</a>
-            </div>
-
-        </div>
+    <!-- 종합 판정 -->
+    <div class="card verdict-card g-12" id="verdictCard">
+      <div class="verdict-icon" id="verdictIcon">?</div>
+      <div class="verdict-body">
+        <div class="verdict-title" id="verdictTitle">분석 중...</div>
+        <div class="verdict-desc" id="verdictDesc">비디오와 오디오 모델의 결과를 종합한 최종 판정입니다.</div>
+      </div>
+      <div class="verdict-score">
+        <div class="num" id="verdictScore">-</div>
+        <div class="lbl">종합 위조 점수</div>
+      </div>
     </div>
 
-    <script src="js/common.js"></script>
-    <script src="js/dashboard.js"></script>
+    <!-- 비디오 위조 확률 -->
+    <div class="card metric-card g-4">
+      <div class="metric-label"><span class="ic">🎞️</span> 비디오 위조 확률</div>
+      <canvas id="videoGauge" width="180" height="180"></canvas>
+      <div class="gauge-num" id="videoGaugeNum">-</div>
+      <div class="gauge-sub">이미지 프레임 기반 탐지 모델</div>
+    </div>
+
+    <!-- 오디오 위조 확률 -->
+    <div class="card metric-card g-4">
+      <div class="metric-label"><span class="ic">🎙️</span> 오디오 위조 확률</div>
+      <canvas id="audioGauge" width="180" height="180"></canvas>
+      <div class="gauge-num" id="audioGaugeNum">-</div>
+      <div class="gauge-sub">음성 파형 기반 탐지 모델</div>
+    </div>
+
+    <!-- 종합 점수 요약 -->
+    <div class="card metric-card g-4">
+      <div class="metric-label"><span class="ic">📊</span> 종합 점수 요약</div>
+      <canvas id="overallGauge" width="180" height="180"></canvas>
+      <div class="gauge-num" id="overallGaugeNum">-</div>
+      <div class="gauge-sub" id="overallGaugeSub">비디오 55% + 오디오 45% 가중 평균</div>
+    </div>
+
+    <!-- 시간대별 딥페이크 의심도 -->
+    <div class="card g-12 timeline-card">
+      <div class="card-title-row">
+        <h3>⏱ 시간대별 딥페이크 의심도</h3>
+        <span class="hint">영상 재생 구간별 의심도 변화</span>
+      </div>
+      <canvas id="timelineChart"></canvas>
+      <div class="timeline-legend">
+        <span><span class="legend-dot" style="background:#4fd1ff"></span>의심도(%)</span>
+        <span><span class="legend-dot" style="background:#ff5470"></span>위험 구간 (70% 이상)</span>
+        <span><span class="legend-dot" style="background:#ffb454"></span>주의 구간 (40~70%)</span>
+      </div>
+    </div>
+
+    <!-- 얼굴 부위별 분석 -->
+    <div class="card g-12">
+      <div class="card-title-row">
+        <h3>🧑 얼굴 부위별 분석 결과</h3>
+        <span class="hint">부위별 합성 흔적 의심도</span>
+      </div>
+      <div class="face-analysis-body">
+        <div class="face-svg-wrap">
+          <svg id="faceSvg" width="180" height="220" viewBox="0 0 180 220">
+            <!-- 얼굴 윤곽 -->
+            <ellipse id="regSkin" cx="90" cy="115" rx="62" ry="80" fill="#2dd4a7" fill-opacity="0.18" stroke="#324063" stroke-width="1.5" />
+            <!-- 턱선 -->
+            <path id="regJaw" d="M 34 120 Q 34 185 90 205 Q 146 185 146 120" fill="none" stroke="#324063" stroke-width="3" />
+            <!-- 눈썹 -->
+            <path id="regBrows" d="M 52 88 Q 64 80 76 88 M 104 88 Q 116 80 128 88" fill="none" stroke="#324063" stroke-width="4" stroke-linecap="round" />
+            <!-- 눈 -->
+            <g id="regEyes">
+              <ellipse cx="64" cy="103" rx="11" ry="6" fill="#324063" />
+              <ellipse cx="116" cy="103" rx="11" ry="6" fill="#324063" />
+            </g>
+            <!-- 코 -->
+            <path id="regNose" d="M 90 100 L 84 132 Q 90 138 96 132 Z" fill="none" stroke="#324063" stroke-width="3" stroke-linejoin="round" />
+            <!-- 입 -->
+            <path id="regMouth" d="M 66 155 Q 90 168 114 155" fill="none" stroke="#324063" stroke-width="4" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="face-region-list" id="faceRegionList">
+          <!-- JS가 채웁니다 -->
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-actions">
+      <button id="restartBtn" class="btn btn-secondary">새 영상 분석하기</button>
+      <a href="index.html" class="btn btn-secondary">처음으로</a>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

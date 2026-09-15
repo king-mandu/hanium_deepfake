@@ -1,67 +1,67 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>영상 업로드 | DeepGuard</title>
-    <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>영상 업로드 | DeepGuard</title>
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <a href="index.html" class="brand">
-                <div class="brand-mark">🛡️</div>
-                DeepGuard
-            </a>
-            <div class="nav-steps">
-                <div class="nav-step active"><span class="dot">1</span><span class="label">업로드</span></div>
-                <div class="nav-step-connector"></div>
-                <div class="nav-step"><span class="dot">2</span><span class="label">분석 중</span></div>
-                <div class="nav-step-connector"></div>
-                <div class="nav-step"><span class="dot">3</span><span class="label">결과</span></div>
-            </div>
-        </div>
-    </nav>
-
-    <div class="page-head">
-        <div class="container">
-            <h1>분석할 영상을 업로드하세요</h1>
-            <p>MP4, MOV, WEBM 등 일반적인 영상 형식을 지원합니다.</p>
-        </div>
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-mark">🛡️</div>
+      DeepGuard
+    </a>
+    <div class="nav-steps">
+      <div class="nav-step active"><span class="dot">1</span><span class="label">업로드</span></div>
+      <div class="nav-step-connector"></div>
+      <div class="nav-step"><span class="dot">2</span><span class="label">분석 중</span></div>
+      <div class="nav-step-connector"></div>
+      <div class="nav-step"><span class="dot">3</span><span class="label">결과</span></div>
     </div>
+  </div>
+</nav>
 
-    <div class="upload-wrap">
-        <div id="dropZone" class="upload-zone">
-            <div class="upload-icon">📤</div>
-            <h3>클릭하거나 파일을 이곳에 끌어다 놓으세요</h3>
-            <p>영상 파일 1개를 선택해주세요</p>
-            <div class="formats">지원 형식: MP4 · MOV · WEBM · AVI &nbsp;|&nbsp; 최대 500MB</div>
-            <input id="fileInput" type="file" accept="video/*" hidden />
-        </div>
+<div class="page-head">
+  <div class="container">
+    <h1>분석할 영상을 업로드하세요</h1>
+    <p>MP4, MOV, WEBM 등 일반적인 영상 형식을 지원합니다.</p>
+  </div>
+</div>
 
-        <div id="errorMsg" class="error-msg"></div>
+<div class="upload-wrap">
+  <div id="dropZone" class="upload-zone">
+    <div class="upload-icon">📤</div>
+    <h3>클릭하거나 파일을 이곳에 끌어다 놓으세요</h3>
+    <p>영상 파일 1개를 선택해주세요</p>
+    <div class="formats">지원 형식: MP4 · MOV · WEBM · AVI &nbsp;|&nbsp; 최대 500MB</div>
+    <input id="fileInput" type="file" accept="video/*" hidden />
+  </div>
 
-        <div id="filePreview" class="card file-preview">
-            <div id="fileThumb" class="file-thumb">🎬</div>
-            <div class="file-meta">
-                <div id="fileName" class="fname">-</div>
-                <div id="fileSub" class="fsub">-</div>
-            </div>
-            <button id="fileRemoveBtn" class="file-remove" title="제거">✕</button>
-        </div>
+  <div id="errorMsg" class="error-msg"></div>
 
-        <div class="upload-actions">
-            <a href="index.html" class="btn btn-secondary">취소</a>
-            <button id="analyzeBtn" class="btn btn-primary" disabled>분석 시작하기 →</button>
-        </div>
+  <div id="filePreview" class="card file-preview">
+    <div id="fileThumb" class="file-thumb">🎬</div>
+    <div class="file-meta">
+      <div id="fileName" class="fname">-</div>
+      <div id="fileSub" class="fsub">-</div>
     </div>
+    <button id="fileRemoveBtn" class="file-remove" title="제거">✕</button>
+  </div>
 
-    <!-- 영상 메타데이터(길이) 추출 및 썸네일 캡처용 (화면에 보이지 않음) -->
-    <video id="hiddenVideo" style="display:none" muted playsinline></video>
-    <canvas id="hiddenCanvas" style="display:none"></canvas>
+  <div class="upload-actions">
+    <a href="index.html" class="btn btn-secondary">취소</a>
+    <button id="analyzeBtn" class="btn btn-primary" disabled>분석 시작하기 →</button>
+  </div>
+</div>
 
-    <script src="js/common.js"></script>
-    <script src="js/upload.js"></script>
+<!-- 영상 메타데이터(길이) 추출 및 썸네일 캡처용 (화면에 보이지 않음) -->
+<video id="hiddenVideo" style="display:none" muted playsinline></video>
+<canvas id="hiddenCanvas" style="display:none"></canvas>
+
+<script src="js/common.js"></script>
+<script src="js/upload.js"></script>
 </body>
 </html>
